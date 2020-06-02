@@ -13,6 +13,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -87,6 +88,14 @@ public class TestOneActivity extends AppCompatActivity {
                     }
                 });
 
+        //hook
+        RxJavaPlugins.setIoSchedulerHandler(new Function<Scheduler, Scheduler>() {
+            @Override
+            public Scheduler apply(Scheduler scheduler) throws Exception {
+                return scheduler;
+            }
+        });
+
 
         // Observable 的创建过程
         Observable.create(new ObservableOnSubscribe<String>() {
@@ -102,7 +111,9 @@ public class TestOneActivity extends AppCompatActivity {
                 return null;
             }
         })
+                //对上层代码分配异步线程
                 .subscribeOn(Schedulers.io())
+                //给下面的代码分配线程
                 .observeOn(AndroidSchedulers.mainThread())
 
                 //2. subsribe 的订阅流程

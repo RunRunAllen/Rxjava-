@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.notedemo.MyObserver;
+import com.example.notedemo.Observer.MyObserverable;
 import com.example.notedemo.R;
 
 import io.reactivex.Observable;
@@ -29,12 +31,14 @@ public class TestOneActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initRxjava();
-//
-//        //标准观察者模式逻辑：
-//        MyObserverable myObserverable = new MyObserverable();
-//        MyObserver myObserver = new MyObserver();
-//        myObserverable.addObserver(myObserver);
-//        myObserverable.pushMessage("我要更新啦。。。。。");
+
+        //标准观察者模式逻辑：
+        MyObserverable myObserverable = new MyObserverable();
+        MyObserver myObserver = new MyObserver();
+        myObserverable.addObserver(myObserver);
+        myObserverable.pushMessage("我要更新啦。。。。。");
+
+
 
 
         //hook 全局

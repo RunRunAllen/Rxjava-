@@ -12,7 +12,8 @@
         <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".rxjava.TestOneActivity">
+        <activity android:name=".rxjava.TestOneActivity"/>
+        <activity android:name=".rxjava.TestTwoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
